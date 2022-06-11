@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #pragma warning(disable:4996)
 
-
-
 typedef struct _node {
 
 	int data;
@@ -85,18 +83,22 @@ int dequeue(Queue* q) {
 	Node* tmp = q->front;
 	int re;
 
+	// 예외처리
 	if (IsEmpty(q)) {
 		printf("Queue is Empty!!\n");
 		return;
 	}
-	else {
-		re = tmp->data;
-		q->front = q->front->next;
 
-		free(tmp);
-		q->size--;
-		return re;
-	}
+	// 원소 저장 후 위치 옮기기
+	re = tmp->data;
+	q->front = q->front->next;
+	
+	if (q->front == NULL) q->rear = NULL;
+	
+	free(tmp);
+	q->size--;
+	
+	return re;
 }
 
 int front(Queue* q) {
