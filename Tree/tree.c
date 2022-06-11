@@ -30,12 +30,26 @@ int size(Tree * tree);			// 트리 크기 확인
 Node* searchNode(Node* node, int data);					// 노드 찾기
 void makeTree(Tree* tr, int main, int letf, int right);		// 트리 생성
 
-
+void preOrder(Tree* tree);		// 선위 순회 (root -> L -> R)
+void inOrder(Tree* tree);		// 중위 순회 (L -> root -> R)
+void postOrder(Tree* tree);		// 후위 순회 (L -> R > root)
 
 void main() {
 
 	Tree tree; InitTree(&tree);
+	makeTree(&tree, 1, 2, 3);
+	//makeTree(&tree, 2, 4, 5);
+	//makeTree(&tree, 3, 6, 7);
 
+	printf("%d %d %d", tree.root->data, tree.root->left->data, tree.root->right->data);
+	//printf("%d %d %d", root->left->data, root->left->left->data, root->left->right->data);
+	//printf("%d %d %d", root->right->data, root->right->left->data, root->right->right->data);
+
+	/*
+	preOrder(&tree);
+	inOrder(&tree);
+	postOrder(&tree);
+	*/
 }
 
 void InitTree(Tree* tree) {
@@ -62,7 +76,7 @@ bool IsEmpty(Node* node) {
 
 bool IsInternal(Node* node) {
 
-	return (node->left != NULL || node->right != NULL)? true : false;
+	return node->left || node->right? true : false;
 
 }
 
@@ -76,17 +90,19 @@ int size(Tree * tree){
 
 Node* searchNode(Node* node, int data) {
 
-	Node* tmp;
+	Node* tmp = NULL;
 
 	if (node->data == data) {
 		return node;
 	}
 	
 	if (IsInternal(node)) {
-		if (node->left) {
+
+		if (node->left && !tmp) {
 			tmp = searchNode(node->left, data);
 		}
-		else if (node -> right) {
+
+		if (node -> right && !tmp) {
 			tmp = searchNode(node->right, data);
 		}
 	}
@@ -96,18 +112,17 @@ Node* searchNode(Node* node, int data) {
 }
 
 void makeTree(Tree* tr, int main, int letf, int right) {
+	Node* root = tr->root;
+	Node* pos = NULL;
 
-	Node* pos;
-
-	if (IsEmpty(tr->root)) {
+	if (!root) {
 		pos = new_node(main);
-		tr->root = pos;
+		root = pos;
 		tr->size++;
 	}
-	else pos = searchNode(tr->root, main);
+	else pos = searchNode(root, main);
 
 	if (letf) {
-
 		pos->left = new_node(letf);
 		tr->size++;
 	}
@@ -117,5 +132,36 @@ void makeTree(Tree* tr, int main, int letf, int right) {
 		tr->size++;
 	}
 
+	printf("%d, %d, %d 트리 노드 생성 완료\n", root->data, root->left->data, root->right->data );
+}
 
+void preOrder(Tree* tree) {
+
+	if (IsEmpty(tree->root)) return;
+
+	printf("%d ", tree->root->data);
+	preOrder(tree->root->left);
+	preOrder(tree->root->right);
+	
+
+}
+
+void inOrder(Tree* tree) {
+
+	if (IsEmpty(tree->root)) return;
+
+	preOrder(tree->root->left);
+	printf("%d ", tree->root->data);
+	preOrder(tree->root->right);
+
+}
+
+void postOrder(Tree* tree) {
+
+	if (IsEmpty(tree->root)) return;
+
+	preOrder(tree->root->left);
+	preOrder(tree->root->right);
+	printf("%d ", tree->root->data);
+	
 }
