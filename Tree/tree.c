@@ -38,18 +38,18 @@ void main() {
 
 	Tree tree; InitTree(&tree);
 	makeTree(&tree, 1, 2, 3);
-	//makeTree(&tree, 2, 4, 5);
-	//makeTree(&tree, 3, 6, 7);
+	makeTree(&tree, 2, 4, 5);
+	makeTree(&tree, 3, 6, 7);
 
-	printf("%d %d %d", tree.root->data, tree.root->left->data, tree.root->right->data);
-	//printf("%d %d %d", root->left->data, root->left->left->data, root->left->right->data);
-	//printf("%d %d %d", root->right->data, root->right->left->data, root->right->right->data);
-
-	/*
-	preOrder(&tree);
-	inOrder(&tree);
-	postOrder(&tree);
-	*/
+	//printf("%d %d %d", tree.root->data, tree.root->left->data, tree.root->right->data);
+	
+	Node* root = tree.root;
+	preOrder(root);
+	printf("\n");
+	inOrder(root);
+	printf("\n");
+	postOrder(root);
+	printf("\n");
 }
 
 void InitTree(Tree* tree) {
@@ -112,15 +112,15 @@ Node* searchNode(Node* node, int data) {
 }
 
 void makeTree(Tree* tr, int main, int letf, int right) {
-	Node* root = tr->root;
+	
 	Node* pos = NULL;
 
-	if (!root) {
+	if (!tr->root) {
 		pos = new_node(main);
-		root = pos;
+		tr->root = pos;
 		tr->size++;
 	}
-	else pos = searchNode(root, main);
+	else pos = searchNode(tr->root, main);
 
 	if (letf) {
 		pos->left = new_node(letf);
@@ -132,36 +132,37 @@ void makeTree(Tree* tr, int main, int letf, int right) {
 		tr->size++;
 	}
 
-	printf("%d, %d, %d 트리 노드 생성 완료\n", root->data, root->left->data, root->right->data );
+	printf("%d, %d, %d 트리 노드 생성 완료\n", pos->data, pos->left->data, pos->right->data );
 }
 
-void preOrder(Tree* tree) {
+void preOrder(Node* root) {
 
-	if (IsEmpty(tree->root)) return;
+	if (root == NULL) return;
 
-	printf("%d ", tree->root->data);
-	preOrder(tree->root->left);
-	preOrder(tree->root->right);
+	printf("%d ", root->data);
+	preOrder(root->left);
+	preOrder(root->right);
 	
 
 }
 
-void inOrder(Tree* tree) {
+void inOrder(Node* root) {
 
-	if (IsEmpty(tree->root)) return;
+	if (root == NULL) return;
 
-	preOrder(tree->root->left);
-	printf("%d ", tree->root->data);
-	preOrder(tree->root->right);
+	preOrder(root->left);
+	printf("%d ", root->data);
+	preOrder(root->right);
 
 }
 
-void postOrder(Tree* tree) {
+void postOrder(Node* root) {
 
-	if (IsEmpty(tree->root)) return;
+	if (root == NULL) return;
 
-	preOrder(tree->root->left);
-	preOrder(tree->root->right);
-	printf("%d ", tree->root->data);
+	preOrder(root->left);
+	preOrder(root->right);
+	printf("%d ", root->data);
 	
 }
+
