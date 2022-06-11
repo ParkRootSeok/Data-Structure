@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #pragma warning(disable:4996)
 
-
-
 typedef struct _node {
 
 	int data;
