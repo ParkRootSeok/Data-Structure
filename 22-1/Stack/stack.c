@@ -24,7 +24,7 @@ bool IsEmpty(Stack* stack);
 void Elements(Stack * stack);
 
 
-void main() {
+int main() {
 
 	Stack stack; InitStack(&stack);
 
