@@ -2,14 +2,17 @@
 
 /*
   * 이진 탐색
-  * 시간 복잡도 : 
+  * 시간 복잡도 : T[n] = log2n
   * 이진 탐색은 반드시 원소 정렬이 필요
+  * 데이터 수의 증가에 따라 연산 횟수의 증가는 미미
 */
+
 int binarySearch(int* arr, int len, int target) {    
 
     int first = 0;
     int last = len - 1;
     int mid;
+    int cnt = 0;
 
     while (first <= last) {
         
@@ -25,9 +28,9 @@ int binarySearch(int* arr, int len, int target) {
                 first = mid + 1;
             }
         }
-         
-    }
-    
+        cnt++;
+    } printf("연산 횟수 : %d\n", cnt);
+
     return -1;
 
 }
@@ -42,14 +45,14 @@ int main() {
           
         int idx, target;
 
-        printf("target = ");
+        printf("Target = ");
         scanf("%d", &target);
         idx = binarySearch(arr, sizeof(arr) / sizeof(int), target);
 
         if (idx == -1) {
             printf("Fail to Search\n");
         } else {
-            printf("Target index : %d\n", idx);
+            printf("Target Index : %d\n", idx);
         }
         
     }
