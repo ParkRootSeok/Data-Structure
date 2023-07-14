@@ -19,7 +19,7 @@ int WhoIsPrecede(Data d1, Data d2) {
 
 int main() {
     
-    Data * data;
+    Data data;
     Data num;
     linkedList list;
 
