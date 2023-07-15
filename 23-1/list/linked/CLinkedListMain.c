@@ -3,7 +3,7 @@
 
 /*
     * 원형 연결 리스트
-    * 단술 연결 리스트와 달리 head, tail 모두 노드 추가 가능
+    * 단순 연결 리스트와 달리 head, tail 모두 노드 추가 가능
     * tail 노드가 head(tail->next)/tail 두 가지 역할을 담당
 */
 
@@ -24,7 +24,7 @@ int main() {
 
         if(num == -1) break;
 
-        LInsert(&list, num);
+        LInsertFront(&list, num);
 
     } printf("number of Data = %d", LCount(&list)); // 데이터 갯수 출력 
 
