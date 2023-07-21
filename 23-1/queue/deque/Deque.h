@@ -31,8 +31,8 @@ void DAddFirst(Deque * q, Data data);
 void DAddLast(Deque * q, Data data);
 
 // 데이터 삭제
-Data DRemoveFirst(QDeque * q);
-Data DRemoveLast(QDeque * q);
+Data DRemoveFirst(Deque * q);
+Data DRemoveLast(Deque * q);
 
 
 // 데이터 조회
